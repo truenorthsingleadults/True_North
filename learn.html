@@ -380,16 +380,50 @@
 
                     </div>
                     <h4>Class Details</h4>
-                    <p>
-                        <h6>Week 1. Identify fears and <a href="https://drive.google.com/file/d/1RAh4_xJ3LoNCjAXLHuQCp1KI88JROr-u/view?usp=sharing"class="secrets-link">Attachment Patterns.</a> Homework prepare for the <a href="https://drive.google.com/file/d/11T7UMtlhJ1hHRU8u8UBs1YdnWlbIdbrj/view?usp=sharing"class="secrets-link">17 Secrets.</a>
-                            <p>Week 2. Review 17 Secrets and safety through assessing and offering Empathy, Self Control, Responsibility or "E.S.P."
-                                <p>Week 3. Creating a Lasting Plan for success and identify your patterns of success and strengths to help you move from fear to resilience.</p>
-                            </p>
-                        </h6>
-                    </p>
+                            <div class="week-content">
 
+                                <h6>
+                                    Week 1. Identify fears and
+                                    <a href="javascript:void(0);"
+                                    class="secrets-link"
+                                    onclick="openImage('assets/img/Secure_Attachment.jpg')">
+                                        Attachment Patterns
+                                    </a>.
+                                    Homework: prepare for the
+                                    <a href="javascript:void(0);"
+                                    class="secrets-link"
+                                    onclick="openImage('assets/img/17_Secrets.jpg')">
+                                        17 Secrets
+                                    </a>.
+                                </h6>
 
-                    <div class="instructor-card">
+                                <h6>
+                                    Week 2. Review
+                                    <a href="javascript:void(0);"
+                                    class="secrets-link"
+                                    onclick="openImage('assets/img/17_Secrets.jpg')">
+                                        17 Secrets
+                                    </a>
+                                    and safety through assessing and offering Empathy, Self Control,
+                                    Responsibility or "E.S.P."
+                                </h6>
+
+                                <h6>
+                                    Week 3. Creating a Lasting Plan for success and identify your
+                                    patterns of success and strengths to help you move from fear
+                                    to resilience.
+                                </h6>
+
+                            </div>
+
+                            <!-- Image Lightbox -->
+                            <div id="imageLightbox" class="image-lightbox" onclick="closeImage()">
+
+                                <span class="close-image">&times;</span>
+
+                                <img id="lightboxImage" src="" alt="Expanded resource">
+
+                            </div>                    <div class="instructor-card">
 
                         <img 
                             src="https://media.licdn.com/dms/image/v2/D5603AQFlXQ6RTk9TNQ/profile-displayphoto-shrink_800_800/B56Zd7jcFIGQAk-/0/1750124577440?e=1787184000&v=beta&t=ZOrT5cUp6aTR_FlG6t6blHSY1_BGp4yc6FjSs4Cj96M"
@@ -451,5 +485,15 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script>
+function openImage(imageSource) {
+    document.getElementById("lightboxImage").src = imageSource;
+    document.getElementById("imageLightbox").style.display = "flex";
+}
+
+function closeImage() {
+    document.getElementById("imageLightbox").style.display = "none";
+}
+</script>
     </body>
 </html>
