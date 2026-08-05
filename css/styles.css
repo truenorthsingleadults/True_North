@@ -11249,3 +11249,66 @@ header.masthead .post-heading .meta a {
     opacity: 0.5;
     margin: 50px 0;
 }
+.class-details {
+    line-height: 1.7;
+}
+
+.class-details h5 {
+    color: #2f4858;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.class-details h6 {
+    color: #2f4858;
+    line-height: 1.5;
+}
+
+.class-details p {
+    color: #555;
+    line-height: 1.8;
+}
+
+.class-session {
+    padding-left: 1.25rem;
+    border-left: 3px solid #8fa6b5;
+}
+.week-content {
+    line-height: 1.7;
+}
+
+.week-session {
+    padding: 1rem 1.25rem;
+    border-left: 3px solid #8fa6b5;
+}
+
+.week-session h6 {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+.week-session .secrets-link {
+    color: #2f4858;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.week-session .secrets-link:hover {
+    color: #8fa6b5;
+}.class-schedule {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #8fa6b5;
+    text-align: center;
+}
+
+.class-schedule p {
+    margin-bottom: 0.25rem;
+}
+
+.class-schedule p:first-child {
+    color: #2f4858;
+    font-weight: 600;
+}
