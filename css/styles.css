@@ -11326,27 +11326,37 @@ header.masthead .post-heading .meta a {
 }
 
 /* ==============================
-   TRUE NORTH CUSTOM MAP MARKER
+   TRUE NORTH MAP MARKER
    ============================== */
 
 .true-north-marker {
-    width: 48px;
-    height: 48px;
-    background-color: #C65D2E;
-    border: 3px solid white;
+    width: 44px !important;
+    height: 44px !important;
+    background-color: #2f4858;
+    border: 3px solid #FFFFFF;
     border-radius: 50%;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
+
+    overflow: hidden;
 }
 
 .true-north-marker img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
+    width: 28px !important;
+    height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    object-fit: contain !important;
+    display: block !important;
 }
+
 /* Visible class name next to each map pin */
 .map-label {
     background-color: #FFFFFF;

@@ -687,18 +687,17 @@ function closeImage() {
     // TRUE NORTH MOUNTAIN ICON
     // ==============================
 
-    var trueNorthIcon = L.divIcon({
-        className: '',
-        html: `
-            <div class="true-north-marker">
-                <img src="assets/favicon_mtn.png" alt="True North">
-            </div>
-        `,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -30]
-    });
-
+var trueNorthIcon = L.divIcon({
+    className: 'true-north-map-icon',
+    html: `
+        <div class="true-north-marker">
+            <img src="assets/favicon_mtn.png" alt="True North">
+        </div>
+    `,
+    iconSize: [44, 44],
+    iconAnchor: [22, 22],
+    popupAnchor: [0, -28]
+});
 
     // ==============================
     // CLASS LOCATIONS
