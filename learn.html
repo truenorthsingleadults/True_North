@@ -676,8 +676,15 @@ function closeImage() {
     // TRUE NORTH MAP
     // ==============================
 
-    var map = L.map('true-north-map');
-
+var map = L.map('true-north-map', {
+    scrollWheelZoom: false,
+    dragging: false,
+    doubleClickZoom: false,
+    touchZoom: false,
+    boxZoom: false,
+    keyboard: false,
+    zoomControl: false
+});
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
