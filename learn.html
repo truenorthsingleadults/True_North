@@ -15,6 +15,48 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/overwrite.css" rel="stylesheet" />
+        <!-- Leaflet Map CSS -->
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin="">
+<style>
+    #true-north-map {
+        width: 100%;
+        height: 500px;
+        border-radius: 10px;
+        margin: 2rem 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .map-popup {
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .map-popup h5 {
+        color: #2f4858;
+        margin-bottom: 8px;
+    }
+
+    .map-popup p {
+        margin-bottom: 10px;
+    }
+
+    .directions-button {
+        display: inline-block;
+        padding: 8px 14px;
+        background-color: #2f4858;
+        color: white !important;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+    }
+
+    .directions-button:hover {
+        background-color: #8fa6b5;
+        color: white !important;
+    }
+</style>
     </head>
     <body id="top">
         <!-- Navigation-->
@@ -67,6 +109,18 @@
             <a href="#community">COMMUNITY | Relationships</a>
         </li>
     </ul>
+<div class="location-map-section">
+
+    <h2>Class Locations</h2>
+
+    <p>
+        Click a location on the map to learn more and get directions.
+    </p>
+
+    <div id="true-north-map"></div>
+
+</div>
+</div>
      <div class="class-schedule">
         <p><strong>Class Schedule</strong></p>
         <p>Every Thursday at 7:00 PM</p>
@@ -524,7 +578,47 @@ Missionary Training Center. In December 2024, they returned home.
                         </div>
 
                     </div>
-                    <!-- <h4>Class Details</h4> -->
+
+<h4 class="mb-4">Class Details</h4>
+
+<div class="week-content">
+
+    <div class="week-session mb-4">
+        <h6>
+            <strong>BEYOND WORDS: CONNECTING WITH PURPOSE</strong>
+        </h6>
+
+        <p>
+            We all long for meaningful connection, yet many of our conversations remain at the surface.
+            Moving beyond small talk requires intention, curiosity, and the courage to be authentic. This
+            three-part workshop equips participants with principles and practical tools to build relationships
+            in which people feel seen, heard, and valued.
+        </p>
+    </div>
+
+    <div class="week-session mb-4">
+        <h6>
+            <strong>Participants will:</strong>
+        </h6>
+
+        <ol>
+            <li>
+                Understand the foundational principles that foster meaningful and lasting connection
+            </li>
+            <li>
+                Communicate with greater intention, authenticity, and appropriate vulnerability
+            </li>
+            <li>
+                Recognize and affirm the unique strengths, experiences, and contributions of others
+            </li>
+            <li>
+                Apply practical strategies to initiate, deepen, and sustain meaningful relationships
+            </li>
+        </ol>
+    </div>
+
+</div>
+<hr class="instructor-divider">
 
                     <a href="#top"class="back-to-top">Back to Top</a>
 
@@ -569,6 +663,167 @@ function openImage(imageSource) {
 function closeImage() {
     document.getElementById("imageLightbox").style.display = "none";
 }
+</script>
+<!-- Leaflet -->
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    crossorigin="">
+</script>
+
+<script>
+
+    // ==============================
+    // TRUE NORTH MAP
+    // ==============================
+
+    var map = L.map('true-north-map');
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+
+    // ==============================
+    // TRUE NORTH MOUNTAIN ICON
+    // ==============================
+
+    var trueNorthIcon = L.divIcon({
+        className: '',
+        html: `
+            <div class="true-north-marker">
+                <img src="assets/favicon_mtn.png" alt="True North">
+            </div>
+        `,
+        iconSize: [48, 48],
+        iconAnchor: [24, 24],
+        popupAnchor: [0, -30]
+    });
+
+
+    // ==============================
+    // CLASS LOCATIONS
+    // ==============================
+
+    var locations = [
+        {
+            name: "FAITH",
+            title: "Study the Infinite Atonement",
+            address: "2633 South 50 West, Bountiful, Utah 84010"
+        },
+        {
+            name: "COVENANTS",
+            title: "Temple Covenants and Symbology",
+            address: "567 W 2000 S, Woods Cross, Utah 84010"
+        },
+        {
+            name: "DISCIPLESHIP",
+            title: "Living a Christ Centered Life",
+            address: "3317 South 800 West, Bountiful, Utah 84010"
+        },
+        {
+            name: "COMMUNITY",
+            title: "Relationships",
+            address: "2285 South 200 West, Bountiful, Utah 84010"
+        }
+    ];
+
+
+    // ==============================
+    // GEOCODE EACH ADDRESS
+    // ==============================
+
+    var mapLocations = [];
+
+    locations.forEach(function(location) {
+
+        fetch(
+            'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' +
+            encodeURIComponent(location.address)
+        )
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+
+            if (data.length === 0) {
+                console.log("Location not found: " + location.address);
+                return;
+            }
+
+            var latitude = parseFloat(data[0].lat);
+            var longitude = parseFloat(data[0].lon);
+
+            var directions =
+                'https://www.google.com/maps/dir/?api=1&destination=' +
+                encodeURIComponent(location.address);
+
+
+            // Create marker
+            var marker = L.marker(
+                [latitude, longitude],
+                { icon: trueNorthIcon }
+            ).addTo(map);
+
+
+            // Popup
+            marker.bindPopup(`
+                <div class="map-popup">
+
+                    <h5>${location.name}</h5>
+
+                    <p>
+                        <strong>${location.title}</strong>
+                    </p>
+
+                    <p>
+                        ${location.address}
+                    </p>
+
+                    <a
+                        href="${directions}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="directions-button">
+                        GET DIRECTIONS
+                    </a>
+
+                </div>
+            `);
+
+
+            // Permanent label
+            marker.bindTooltip(location.name, {
+                permanent: true,
+                direction: "right",
+                offset: [25, 0],
+                className: "map-label"
+            });
+
+
+            mapLocations.push(marker);
+
+
+            // Automatically fit map once locations are loaded
+            if (mapLocations.length === locations.length) {
+
+                var allLocations = L.featureGroup(mapLocations);
+
+                map.fitBounds(allLocations.getBounds(), {
+                    padding: [50, 50]
+                });
+
+            }
+
+        })
+        .catch(function(error) {
+            console.error(
+                "Unable to find " + location.address,
+                error
+            );
+        });
+
+    });
+
 </script>
     </body>
 </html>
